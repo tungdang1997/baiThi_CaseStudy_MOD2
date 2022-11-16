@@ -21,6 +21,8 @@ export class ProductMana implements IManagement<Laptop> {
             }
         }
         return 'Not';
+        // let a = this.productList.filter((element)=> element.name === name)
+        // console.table(a)
 
     }
 
