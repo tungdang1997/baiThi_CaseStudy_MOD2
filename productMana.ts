@@ -15,15 +15,8 @@ export class ProductMana implements IManagement<Laptop> {
 
     // @ts-ignore
     findByName(name: string): Laptop | string {
-        for (let i = 0; i < this.productList.length; i++) {
-            if (this.productList[i].name === name) {
-                return this.productList[i];
-            }
-        }
-        return 'Not';
-        // let a = this.productList.filter((element)=> element.name === name)
-        // console.table(a)
-
+        let a = this.productList.filter((element)=> element.name === name);
+         console.table(a)
     }
 
     findById(id: number): number {
@@ -56,3 +49,4 @@ export class ProductMana implements IManagement<Laptop> {
         }
     }
 }
+

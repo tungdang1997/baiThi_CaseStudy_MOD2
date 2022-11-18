@@ -84,7 +84,7 @@ function editProduct() {
 }
 function findByName(){
     let name = readlineSync.question('Enter name need to find : ')
-    console.table(productMana.findByName(name));
+    productMana.findByName(name)
 }
 function display(): void {
     console.log('------Hiển thị sản phẩm-----')
