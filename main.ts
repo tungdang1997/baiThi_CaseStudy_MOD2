@@ -86,6 +86,12 @@ function findByName(){
     let name = readlineSync.question('Enter name need to find : ')
     productMana.findByName(name)
 }
+function findByPrice() {
+    let priceMin = readlineSync.question('Enter price min need to find: ');
+    let priceMax = readlineSync.question('Enter price max need to find: ')
+    // @ts-ignore
+    productMana.findByPrice(priceMin,priceMax)
+}
 function display(): void {
     console.log('------Hiển thị sản phẩm-----')
     console.table(productMana.findAll());
@@ -96,7 +102,8 @@ function main(){
     2.Xoá máy
     3.Sửa máy
     4.Tìm kiếm theo tên
-    5.Hiển thị danh sách máy
+    5.Tìm kiếm theo khoảng giá
+    6.Hiển thị danh sách máy
     0.Thoát chương trình`
     let choice = -1;
     do {
@@ -115,7 +122,9 @@ function main(){
             case 4:
                 findByName();
                 break;
-            case  5:
+            case 5:
+                findByPrice();
+            case  6:
                 display();
                 break;
         }

@@ -4,4 +4,5 @@ export interface IManagement<T>{
     edit(id: number): void;
     remove(id: number):void;
     findByName(name: string): string;
+    findByPrice(price: number): number;
 }

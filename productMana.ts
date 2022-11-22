@@ -18,6 +18,17 @@ export class ProductMana implements IManagement<Laptop> {
         let a = this.productList.filter((element)=> element.name === name);
          console.table(a)
     }
+    // @ts-ignore
+    findByPrice(priceMin: number, priceMax: number): Laptop | number{
+        let b = this.productList.filter((item)=>{
+            if (item.price >= priceMax && item.price <= priceMin){
+                return true;
+            }else {
+                return false
+            }
+        });
+        console.table(b)
+    }
 
     findById(id: number): number {
         for (let i = 0; i < this.productList.length; i++) {
