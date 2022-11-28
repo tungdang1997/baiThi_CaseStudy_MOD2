@@ -13,13 +13,13 @@ export class ProductMana implements IManagement<Laptop> {
         return this.productList
     }
 
-    // @ts-ignore
-    findByName(name: string): Laptop | string {
-        let a = this.productList.filter((element)=> element.name === name);
+
+    findByName(name: string): void{
+        let a:Laptop[] = this.productList.filter((element)=> element.name === name);
          console.table(a)
     }
-    // @ts-ignore
-    findByPrice(priceMin: number, priceMax: number): Laptop | number{
+
+    findByPrice(priceMin: number, priceMax: number): void{
         let b = this.productList.filter((item)=>{
             if (item.price >= priceMax && item.price <= priceMin){
                 return true;
@@ -49,8 +49,9 @@ export class ProductMana implements IManagement<Laptop> {
         }
     }
 
-    // @ts-ignore
-    edit(id: number, t: Laptop): void {
+
+
+    edit(id: number,t:Laptop): void {
         let index = this.findById(+id);
         if (index === -1) {
             console.log('Không có')

@@ -2,7 +2,6 @@ import {Laptop} from "./model";
 import {Gaming} from "./model";
 import {Office} from "./model";
 import {TechnicalGraphics} from "./model";
-import {IManagement} from "./IManagement";
 import {ProductMana} from "./productMana";
 
 
@@ -89,7 +88,6 @@ function findByName(){
 function findByPrice() {
     let priceMin = readlineSync.question('Enter price min need to find: ');
     let priceMax = readlineSync.question('Enter price max need to find: ')
-    // @ts-ignore
     productMana.findByPrice(priceMin,priceMax)
 }
 function display(): void {
@@ -124,6 +122,7 @@ function main(){
                 break;
             case 5:
                 findByPrice();
+                break
             case  6:
                 display();
                 break;
