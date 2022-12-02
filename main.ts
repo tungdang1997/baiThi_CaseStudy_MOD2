@@ -1,132 +1,210 @@
-import {Laptop} from "./model";
-import {Gaming} from "./model";
-import {Office} from "./model";
-import {TechnicalGraphics} from "./model";
-import {ProductMana} from "./productMana";
+import {Song} from "./song";
+import {Album} from "./album";
+import {ManagerSong} from "./ManagerSong";
+import {ManagerAlbum} from "./ManagerAlbum";
 
+let input = require('readline-sync')
+let manaSong = new ManagerSong();
+let manaAlbum = new ManagerAlbum();
 
-let readlineSync = require('readline-sync');
-let productMana = new ProductMana()
+function addAlbum(): void {
+    console.log('------Hiển thị thêm mới-----')
+    let name = input.question('Enter name: ')
+    let id = +input.question('Enter id: ')
+    let album1 = new Album(name, id);
+    manaAlbum.add(album1)
+}
 
+function findByAlbum() {
+    let name = input.question('Enter name album need to find: ')
+    manaAlbum.findByAlbum(name);
+}
 
-function addMenu(){
-    let menu = `---------Bạn muốn thêm dòng máy nào-----------
-    1.Gaming
-    2.Office
-    3.TechnicalGraphics
-    0.Ra menu chính`
+function showAlbum(){
+    let albums = manaAlbum.findAll();
+    let menuAlbums = ''
+    for (let i = 0; i < albums.length; i++) {
+        menuAlbums +=`
+        ${i + 1} - Số album: ${albums[i].id}`
+    }
+    menuAlbums+= `\n\t0.Thoát`
     let choice = -1;
     do {
-        console.log(menu)
-        choice = +readlineSync.question('Enter Choice : ');
-        switch (choice) {
-            case 1:
-                addGaming();
-                break;
-            case 2:
-                addOffice();
-                break;
-            case 3:
-                addTechnicalGraphics();
-                break;
-
+        console.log(menuAlbums)
+        choice = +input.question('Enter choice: ')
+        if (choice === 0){
+            break;
+        }else {
+            let album = manaAlbum.finByIndex(choice - 1);
+            showMenuSong(album)
         }
-    } while (choice !== 0);
+    }while (choice != 0);
+    console.log(menuAlbums)
 }
 
-function addGaming(): void {
-    console.log('------Hiển thị thêm mới------')
-    let name = readlineSync.question('Enter name: ');
-    let id = +readlineSync.question('Enter id: ');
-    let producer = readlineSync.question('Enter producer: ');
-    let price = +readlineSync.question('Enter price: ');
-    let CPU = readlineSync.question('Enter CPU: ');
-    let gaming1 = new Gaming(name, id, producer, price, CPU);
-    productMana.add(gaming1)
+function addSong() {
+    console.log('-------Hiển thị thêm mới------')
+    let name = input.question('Enter name: ')
+    let id = +input.question('Enter id: ')
+    let song1 = new Song(name, id);
+    manaSong.add(song1);
 }
 
-function addOffice(): void {
-    console.log('------Hiển thị thêm mới------')
-    let name = readlineSync.question('Enter name: ');
-    let id = +readlineSync.question('Enter id: ');
-    let producer = readlineSync.question('Enter producer: ');
-    let price = +readlineSync.question('Enter price: ');
-    let HDD = readlineSync.question('Enter HDD: ')
-    let office1 = new Office(name, id, producer, price, HDD);
-    productMana.add(office1)
+function findBySong() {
+    let song = input.question('Enter name song need to find: ');
+    manaSong.findBySong(song)
 }
 
-function addTechnicalGraphics(): void {
-    console.log('------Hiển thị thêm mới------')
-    let name = readlineSync.question('Enter name: ');
-    let id = +readlineSync.question('Enter id: ');
-    let producer = readlineSync.question('Enter producer: ');
-    let price = +readlineSync.question('Enter price: ');
-    let RAM = +readlineSync.question('Enter RAM: ');
-    let technicalGraphics1 = new TechnicalGraphics(name, id, producer, price, RAM);
-    productMana.add(technicalGraphics1)
+
+
+function displayAllSong() {
+    console.log('-------Hiển thị danh sách bài hát------')
+    console.table(manaSong.findAllSong())
 }
 
-function deleteProduct() {
-    let idDelete = readlineSync.question('Enter id delete : ')
-    productMana.remove(idDelete);
+
+function editSong() {
+    let idedit = +input.question('Enter id edit: ')
+    let name = input.question('Enter name: ')
+    let id = +input.question('Enter id: ')
+    let song1 = new Song(name, id)
+    manaSong.edit(idedit, song1)
 }
-function editProduct() {
-    let idEdit = +readlineSync.question('Enter id edit : ')
-    console.log('-------Form sửa sản phầm----------')
-    let name = readlineSync.question('Enter name: ');
-    let id = +readlineSync.question('Enter id: ');
-    let producer = readlineSync.question('Enter producer: ');
-    let price = +readlineSync.question('Enter price: ');
-    let laptop1 = new Laptop(name, id, producer, price);
-    productMana.edit(idEdit, laptop1);
+
+function deleteSong() {
+    let id = +input.question('Enter id delete: ')
+    manaSong.remove(id)
 }
-function findByName(){
-    let name = readlineSync.question('Enter name need to find : ')
-    productMana.findByName(name)
-}
-function findByPrice() {
-    let priceMin = readlineSync.question('Enter price min need to find: ');
-    let priceMax = readlineSync.question('Enter price max need to find: ')
-    productMana.findByPrice(priceMin,priceMax)
-}
-function display(): void {
-    console.log('------Hiển thị sản phẩm-----')
-    console.table(productMana.findAll());
-}
-function main(){
-    let menu = `---------Menu chính-----------
-    1.Thêm mới dòng máy
-    2.Xoá máy
-    3.Sửa máy
-    4.Tìm kiếm theo tên
-    5.Tìm kiếm theo khoảng giá
-    6.Hiển thị danh sách máy
-    0.Thoát chương trình`
+
+// function menuDeleteSong(){
+//     let id = +input.question('Enter id song: ')
+//     let select = `-----Bạn có chắc muốn xoá song?-----
+//     1. Yes
+//     2. No`
+//     let choice1;
+//     do {
+//         console.log(select)
+//         choice1 = +input.question('Enter select: ')
+//         switch (choice1){
+//             case 1:
+//                 deleteSong(id);
+//                 break;
+//             case 2:
+//                 main()
+//                 break
+//         }
+//     }
+//     while (choice1 != 0)
+//
+// }
+
+
+
+function showMenuSong(album: Album) {
+    let main = `------Menu bài hát------
+     1. Thêm bài hát
+     2. Tìm kiếm bài hát
+     3. Hiển thị bài hát
+     4. Sửa bài hát
+     5. Xoá bài hát
+     0. Thoát`
     let choice = -1;
     do {
-        console.log(menu)
-        choice = +readlineSync.question('Enter Choice : ');
+        console.log(main)
+        choice = +input.question('Enter choice: ')
         switch (choice) {
             case 1:
-                addMenu();
+                addSong();
                 break;
             case 2:
-                deleteProduct();
+                findBySong();
                 break;
             case 3:
-                editProduct();
+                displayAllSong();
                 break;
             case 4:
-                findByName();
+                editSong();
                 break;
             case 5:
-                findByPrice();
-                break
-            case  6:
-                display();
+                deleteSong();
+                break;
+            case 0:
                 break;
         }
-    } while (choice !== 0);
+    }while (choice != 0)
+}
+
+
+// function displayAllAlbum() {
+//     console.log('-------Hiển thị album------')
+//     console.log(manaAlbum.findAllAlbum())
+// }
+
+function editAlbum() {
+    let idedit1 = +input.question('Enter id edit: ')
+    let name = input.question('Enter name: ')
+    let id = +input.question('Enter id: ')
+    let album1 = new Album(name, id)
+    manaAlbum.edit(idedit1, album1)
+}
+
+function deleteAlbum() {
+    let idDelete = +input.question('Enter id delete: ')
+    manaAlbum.remove(idDelete)
+}
+
+// function menuDeleteAlbum() {
+//     let id = +input.question('Enter id album: ')
+//     let select = `-----Bạn có chắc muốn xoá album?-----
+//     1. Yes
+//     2. No`
+//     let choice1;
+//     do {
+//         console.log(select)
+//         choice1 = +input.question('Enter select: ')
+//         switch (choice1){
+//             case 1:
+//                 deleteAlbum(id);
+//                 break;
+//             case 2:
+//                 main()
+//                 break
+//         }
+//     }
+//     while (choice1 != 0)
+// }
+
+function main() {
+    let main = `------Trang chủ------
+     1. Thêm album
+     2. Tìm kiếm album
+     3. Hiển thị album
+     4. Sửa album
+     5. Xoá album
+     0. Thoát`
+    let choice = -1;
+    do {
+        console.log(main)
+        choice = +input.question('Enter choice: ')
+        switch (choice) {
+            case 1:
+                addAlbum();
+                break;
+            case 2:
+                findByAlbum();
+                break;
+            case 3:
+                showAlbum()
+                break;
+            case 4:
+                editAlbum();
+                break;
+            case 5:
+                deleteAlbum();
+                break;
+            case 0:
+                break;
+        }
+    }while (choice != 0)
 }
 main();
