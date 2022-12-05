@@ -2,10 +2,8 @@ import {IManagement} from "./IManagement";
 import {Album} from "./album";
 
 
-
-export class ManagerAlbum implements IManagement<Album>{
+export class ManagerAlbum implements IManagement<Album> {
     listAlbum: Album[] = [];
-
 
 
     add(t: Album): void {
@@ -14,23 +12,24 @@ export class ManagerAlbum implements IManagement<Album>{
 
     edit(id: number, t: Album): void {
         let index = this.findById(id);
-        if (index === -1){
+        if (index === -1) {
             console.log('Not Found')
-        }else {
+        } else {
             this.listAlbum[index] = t
         }
 
     }
+
     findAll(): Album[] {
         return this.listAlbum
     }
 
 
     findByAlbum(name: string): void {
-        let a = this.listAlbum.filter((item)=>item.name.toUpperCase().includes(name.toUpperCase()))
-        if (a.length === 0){
+        let a = this.listAlbum.filter((item) => item.name.toUpperCase().includes(name.toUpperCase()))
+        if (a.length === 0) {
             console.log('Not Found')
-        }else {
+        } else {
             console.log(a)
         }
     }
@@ -39,17 +38,19 @@ export class ManagerAlbum implements IManagement<Album>{
         let index = this.findById(id)
         this.listAlbum.splice(index, 1)
     }
+
     findById(id: number): number {
         for (let i = 0; i < this.listAlbum.length; i++) {
-            if (this.listAlbum[i].id === id){
+            if (this.listAlbum[i].id === id) {
                 return i;
             }
-        }return -1;
-    }
-    finByIndex(index: number): Album{
-        return this.listAlbum[index]
+        }
+        return -1;
     }
 
+    finByIndex(index: number): Album {
+        return this.listAlbum[index]
+    }
 
 
 }

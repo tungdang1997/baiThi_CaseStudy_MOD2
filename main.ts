@@ -9,17 +9,17 @@ let manaSong = new ManagerSong();
 let manaAlbum = new ManagerAlbum();
 
 function addAlbum(): void {
-    console.log('------Hiển thị thêm mới-----')
+    console.log('------Show more new-----')
     let name = input.question('Enter name: ')
     let id = +input.question('Enter id: ')
     let album = new Album(name, id);
     for (let i = 0; i < manaAlbum.listAlbum.length; i++) {
         if (manaAlbum.listAlbum[i].id === id) {
-            return console.log('---Trùng id, vui lòng nhập lại---')
+            return console.log('---Same ID, please re-enter---')
         }
     }
     if (name === '') {
-        return console.log('___________________Không được để trống tên________________________')
+        return console.log('___________________Names cannot be left blank________________________')
     }
     manaAlbum.add(album);
 
@@ -35,9 +35,9 @@ function showAlbum() {
     let menuAlbums = ''
     for (let i = 0; i < albums.length; i++) {
         menuAlbums += `
-        ${i + 1} - Số album: ${albums[i].id}`
+        ${i + 1} - Number album: ${albums[i].id}`
     }
-    menuAlbums += `\n\t0.Thoát`
+    menuAlbums += `\n\t0.Exit`
     console.log(albums)
     let choice = -1;
     do {
@@ -54,17 +54,17 @@ function showAlbum() {
 }
 
 function addSong(album: Album) {
-    console.log('-------Hiển thị thêm mới------')
+    console.log('-------Show more new------')
     let name = input.question('Enter name: ')
     let id = +input.question('Enter id: ')
     let song = new Song(name, id, album);
     for (let i = 0; i < manaSong.listSong.length; i++) {
         if (manaSong.listSong[i].id === id) {
-            return console.log('---Trùng id, vui lòng nhập lại---')
+            return console.log('---Same ID, please re-enter---')
         }
     }
     if (name === '') {
-        return console.log('___________________Không được để trống tên________________________')
+        return console.log('___________________Names cannot be left blank________________________')
     }
 
     manaSong.add(song);
@@ -78,7 +78,7 @@ function findBySong() {
 }
 
 function editSong(album: Album) {
-    let idedit = +input.question('Enter id edit: ')
+    let idEdit = +input.question('Enter id edit: ')
     let name = input.question('Enter name: ')
     let id = +input.question('Enter id: ')
     let song1 = new Song(name, id, album)
@@ -86,9 +86,9 @@ function editSong(album: Album) {
     for (let i = 0; i < manaSong.listSong.length; i++) {
 
         if (manaSong.listSong[i].name === name) {
-            return console.log('--- Trùng tên,vui lòng nhập lại---')
+            return console.log('--- Same name, please re-enter---')
         } else {
-            manaSong.edit(idedit, song1)
+            manaSong.edit(idEdit, song1)
         }
     }
 
@@ -108,13 +108,13 @@ function displaySongInAlbum(album: Album) {
 
 
 function showMenuSong(album: Album) {
-    let main = `------Menu bài hát------
-     1. Thêm bài hát
-     2. Tìm kiếm bài hát
-     3. Hiển thị bài hát
-     4. Sửa bài hát
-     5. Xoá bài hát
-     0. Thoát`
+    let main = `------Menu Song------
+     1. Add Song
+     2. Find Song
+     3. Show Song
+     4. Edit Song
+     5. Delete Song
+     0. Exit`
     let choice = -1;
     do {
         console.log(main)
@@ -143,11 +143,11 @@ function showMenuSong(album: Album) {
 
 
 function editAlbum() {
-    let idedit1 = +input.question('Enter id edit: ')
+    let idEdit1 = +input.question('Enter id edit: ')
     let name = input.question('Enter name: ')
     let id = +input.question('Enter id: ')
     let album1 = new Album(name, id)
-    manaAlbum.edit(idedit1, album1)
+    manaAlbum.edit(idEdit1, album1)
 }
 
 function deleteAlbum() {
@@ -156,13 +156,13 @@ function deleteAlbum() {
 }
 
 function main() {
-    let main = `------Trang chủ------
-     1. Thêm album
-     2. Tìm kiếm album
-     3. Hiển thị album
-     4. Sửa album
-     5. Xoá album
-     0. Thoát`
+    let main = `------Page------
+     1. Add album
+     2. Find album
+     3. Show album
+     4. Edit album
+     5. Delete album
+     0. Exit`
     let choice = -1;
     do {
         console.log(main)

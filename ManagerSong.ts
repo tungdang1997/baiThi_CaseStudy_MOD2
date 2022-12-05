@@ -3,18 +3,18 @@ import {Song} from "./song";
 import {Album} from "./album";
 
 
-export class ManagerSong implements IManagement<Song>{
+export class ManagerSong implements IManagement<Song> {
     listSong: Song[] = [];
-    
+
     add(t: Song): void {
         this.listSong.push(t)
     }
 
     edit(id: number, t: Song): void {
         let index = this.findById(id);
-        if (index === -1){
+        if (index === -1) {
             console.log('Not Found')
-        }else {
+        } else {
             this.listSong[index] = t
         }
 
@@ -25,10 +25,10 @@ export class ManagerSong implements IManagement<Song>{
     }
 
     findBySong(name: string): void {
-        let b = this.listSong.filter((item)=>item.name.toUpperCase().includes(name.toUpperCase()))
-        if (b.length === 0){
+        let b = this.listSong.filter((item) => item.name.toUpperCase().includes(name.toUpperCase()))
+        if (b.length === 0) {
             console.log('Not Found')
-        }else {
+        } else {
             console.log(b)
         }
     }
@@ -37,18 +37,20 @@ export class ManagerSong implements IManagement<Song>{
         let index = this.findById(id)
         this.listSong.splice(index, 1)
     }
+
     findById(id: number): number {
         for (let i = 0; i < this.listSong.length; i++) {
-            if (this.listSong[i].id === id){
+            if (this.listSong[i].id === id) {
                 return i;
             }
-        }return -1;
+        }
+        return -1;
     }
 
-    findSongByAlbum(album: Album){
+    findSongByAlbum(album: Album) {
         let listSongInAlbum = [];
         for (let i = 0; i < this.listSong.length; i++) {
-            if (album.id === this.listSong[i].album.id){
+            if (album.id === this.listSong[i].album.id) {
                 listSongInAlbum.push(this.listSong[i])
             }
         }
