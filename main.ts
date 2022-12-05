@@ -2,7 +2,7 @@ import {Song} from "./song";
 import {Album} from "./album";
 import {ManagerSong} from "./ManagerSong";
 import {ManagerAlbum} from "./ManagerAlbum";
-import {log} from "util";
+
 
 let input = require('readline-sync')
 let manaSong = new ManagerSong();
@@ -19,14 +19,10 @@ function addAlbum(): void {
         }
     }
     if (name === '') {
-        return console.log('___________________Không được để chống tên________________________')
-    } else {
-        let album = new Album(name, id);
-        manaAlbum.add(album)
-
+        return console.log('___________________Không được để trống tên________________________')
     }
+    manaAlbum.add(album);
 
-    manaAlbum.add(album)
 }
 
 function findByAlbum() {
@@ -68,15 +64,10 @@ function addSong(album: Album) {
         }
     }
     if (name === '') {
-        return console.log('___________________Không được để chống tên________________________')
-    } else {
-        let song = new Song(name, id, album);
-        manaSong.add(song);
-
-
+        return console.log('___________________Không được để trống tên________________________')
     }
-    manaSong.add(song);
 
+    manaSong.add(song);
     showMenuSong(album)
 
 }

@@ -1,6 +1,3 @@
-
-
-
 export class Album{
     private _name: string;
     private _id: number;
