@@ -12,8 +12,14 @@ export class ManagerSong implements IManagement<Song>{
 
     edit(id: number, t: Song): void {
         let index = this.findById(id);
-        this.listSong[index] = t
+        if (index === -1){
+            console.log('Not Found')
+        }else {
+            this.listSong[index] = t
+        }
+
     }
+
     findAll() {
         return this.listSong
     }

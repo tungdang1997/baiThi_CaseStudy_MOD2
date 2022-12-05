@@ -2,6 +2,7 @@ import {Song} from "./song";
 import {Album} from "./album";
 import {ManagerSong} from "./ManagerSong";
 import {ManagerAlbum} from "./ManagerAlbum";
+import {log} from "util";
 
 let input = require('readline-sync')
 let manaSong = new ManagerSong();
@@ -11,8 +12,21 @@ function addAlbum(): void {
     console.log('------Hiển thị thêm mới-----')
     let name = input.question('Enter name: ')
     let id = +input.question('Enter id: ')
-    let album1 = new Album(name, id);
-    manaAlbum.add(album1)
+    let album = new Album(name, id);
+    for (let i = 0; i < manaAlbum.listAlbum.length; i++) {
+        if (manaAlbum.listAlbum[i].id === id) {
+            return console.log('---Trùng id, vui lòng nhập lại---')
+        }
+    }
+    if (name === '') {
+        return console.log('___________________Không được để chống tên________________________')
+    } else {
+        let album = new Album(name, id);
+        manaAlbum.add(album)
+
+    }
+
+    manaAlbum.add(album)
 }
 
 function findByAlbum() {
@@ -20,25 +34,26 @@ function findByAlbum() {
     manaAlbum.findByAlbum(name);
 }
 
-function showAlbum(){
+function showAlbum() {
     let albums = manaAlbum.findAll();
     let menuAlbums = ''
     for (let i = 0; i < albums.length; i++) {
-        menuAlbums +=`
+        menuAlbums += `
         ${i + 1} - Số album: ${albums[i].id}`
     }
-    menuAlbums+= `\n\t0.Thoát`
+    menuAlbums += `\n\t0.Thoát`
+    console.log(albums)
     let choice = -1;
     do {
         console.log(menuAlbums)
         choice = +input.question('Enter choice: ')
-        if (choice === 0){
+        if (choice === 0) {
             break;
-        }else {
+        } else {
             let album1 = manaAlbum.finByIndex(choice - 1);
             showMenuSong(album1)
         }
-    }while (choice != 0);
+    } while (choice != 0);
     console.log(menuAlbums)
 }
 
@@ -46,8 +61,22 @@ function addSong(album: Album) {
     console.log('-------Hiển thị thêm mới------')
     let name = input.question('Enter name: ')
     let id = +input.question('Enter id: ')
-    let song1 = new Song(name, id, album);
-    manaSong.add(song1);
+    let song = new Song(name, id, album);
+    for (let i = 0; i < manaSong.listSong.length; i++) {
+        if (manaSong.listSong[i].id === id) {
+            return console.log('---Trùng id, vui lòng nhập lại---')
+        }
+    }
+    if (name === '') {
+        return console.log('___________________Không được để chống tên________________________')
+    } else {
+        let song = new Song(name, id, album);
+        manaSong.add(song);
+
+
+    }
+    manaSong.add(song);
+
     showMenuSong(album)
 
 }
@@ -57,13 +86,23 @@ function findBySong() {
     manaSong.findBySong(song)
 }
 
-function editSong() {
+function editSong(album: Album) {
     let idedit = +input.question('Enter id edit: ')
     let name = input.question('Enter name: ')
     let id = +input.question('Enter id: ')
-    let album = input.question('Enter album: ')
     let song1 = new Song(name, id, album)
-    manaSong.edit(idedit, song1)
+
+    for (let i = 0; i < manaSong.listSong.length; i++) {
+
+        if (manaSong.listSong[i].name === name) {
+            return console.log('--- Trùng tên,vui lòng nhập lại---')
+        } else {
+            manaSong.edit(idedit, song1)
+        }
+    }
+
+
+    showMenuSong(album)
 }
 
 function deleteSong() {
@@ -100,7 +139,7 @@ function showMenuSong(album: Album) {
                 displaySongInAlbum(album);
                 break;
             case 4:
-                editSong();
+                editSong(album);
                 break;
             case 5:
                 deleteSong();
@@ -108,9 +147,8 @@ function showMenuSong(album: Album) {
             case 0:
                 break;
         }
-    }while (choice != 0)
+    } while (choice != 0)
 }
-
 
 
 function editAlbum() {
@@ -157,6 +195,7 @@ function main() {
             case 0:
                 break;
         }
-    }while (choice != 0)
+    } while (choice != 0)
 }
+
 main();

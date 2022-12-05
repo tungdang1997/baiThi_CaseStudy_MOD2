@@ -14,7 +14,12 @@ export class ManagerAlbum implements IManagement<Album>{
 
     edit(id: number, t: Album): void {
         let index = this.findById(id);
-        this.listAlbum[index] = t
+        if (index === -1){
+            console.log('Not Found')
+        }else {
+            this.listAlbum[index] = t
+        }
+
     }
     findAll(): Album[] {
         return this.listAlbum
