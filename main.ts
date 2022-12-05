@@ -35,19 +35,21 @@ function showAlbum(){
         if (choice === 0){
             break;
         }else {
-            let album = manaAlbum.finByIndex(choice - 1);
-            showMenuSong(album)
+            let album1 = manaAlbum.finByIndex(choice - 1);
+            showMenuSong(album1)
         }
     }while (choice != 0);
     console.log(menuAlbums)
 }
 
-function addSong() {
+function addSong(album: Album) {
     console.log('-------Hiển thị thêm mới------')
     let name = input.question('Enter name: ')
     let id = +input.question('Enter id: ')
-    let song1 = new Song(name, id);
+    let song1 = new Song(name, id, album);
     manaSong.add(song1);
+    showMenuSong(album)
+
 }
 
 function findBySong() {
@@ -55,19 +57,12 @@ function findBySong() {
     manaSong.findBySong(song)
 }
 
-
-
-function displayAllSong() {
-    console.log('-------Hiển thị danh sách bài hát------')
-    console.table(manaSong.findAllSong())
-}
-
-
 function editSong() {
     let idedit = +input.question('Enter id edit: ')
     let name = input.question('Enter name: ')
     let id = +input.question('Enter id: ')
-    let song1 = new Song(name, id)
+    let album = input.question('Enter album: ')
+    let song1 = new Song(name, id, album)
     manaSong.edit(idedit, song1)
 }
 
@@ -76,28 +71,10 @@ function deleteSong() {
     manaSong.remove(id)
 }
 
-// function menuDeleteSong(){
-//     let id = +input.question('Enter id song: ')
-//     let select = `-----Bạn có chắc muốn xoá song?-----
-//     1. Yes
-//     2. No`
-//     let choice1;
-//     do {
-//         console.log(select)
-//         choice1 = +input.question('Enter select: ')
-//         switch (choice1){
-//             case 1:
-//                 deleteSong(id);
-//                 break;
-//             case 2:
-//                 main()
-//                 break
-//         }
-//     }
-//     while (choice1 != 0)
-//
-// }
-
+function displaySongInAlbum(album: Album) {
+    let list = manaSong.findSongByAlbum(album)
+    console.log(list)
+}
 
 
 function showMenuSong(album: Album) {
@@ -114,13 +91,13 @@ function showMenuSong(album: Album) {
         choice = +input.question('Enter choice: ')
         switch (choice) {
             case 1:
-                addSong();
+                addSong(album);
                 break;
             case 2:
                 findBySong();
                 break;
             case 3:
-                displayAllSong();
+                displaySongInAlbum(album);
                 break;
             case 4:
                 editSong();
@@ -135,10 +112,6 @@ function showMenuSong(album: Album) {
 }
 
 
-// function displayAllAlbum() {
-//     console.log('-------Hiển thị album------')
-//     console.log(manaAlbum.findAllAlbum())
-// }
 
 function editAlbum() {
     let idedit1 = +input.question('Enter id edit: ')
@@ -152,27 +125,6 @@ function deleteAlbum() {
     let idDelete = +input.question('Enter id delete: ')
     manaAlbum.remove(idDelete)
 }
-
-// function menuDeleteAlbum() {
-//     let id = +input.question('Enter id album: ')
-//     let select = `-----Bạn có chắc muốn xoá album?-----
-//     1. Yes
-//     2. No`
-//     let choice1;
-//     do {
-//         console.log(select)
-//         choice1 = +input.question('Enter select: ')
-//         switch (choice1){
-//             case 1:
-//                 deleteAlbum(id);
-//                 break;
-//             case 2:
-//                 main()
-//                 break
-//         }
-//     }
-//     while (choice1 != 0)
-// }
 
 function main() {
     let main = `------Trang chủ------

@@ -1,9 +1,10 @@
-import {Song} from "./song";
+
 import {ManagerSong} from "./ManagerSong";
 
 export class Album extends ManagerSong{
     private _name: string;
     private _id: number;
+
     constructor(name: string, id: number) {
         super();
         this._name = name;

@@ -1,28 +1,40 @@
 import {Album} from "./album";
 
+
 export class Song {
-    name: string;
-    id: number
+    private _name: string;
+    private _id: number;
+    private _album: Album
 
-    constructor(name: string, id: number) {
-        this.name = name;
-        this.id = id;
+
+    constructor(name: string, id: number, album: Album) {
+        this._name = name;
+        this._id = id;
+        this._album = album;
     }
 
 
-    getName(): string {
-        return this.name;
+    get name(): string {
+        return this._name;
     }
 
-    setName(value: string) {
-        this.name = value;
+    set name(value: string) {
+        this._name = value;
     }
 
-    getId(): number {
-        return this.id;
+    get id(): number {
+        return this._id;
     }
 
-    setId(value: number) {
-        this.id = value;
+    set id(value: number) {
+        this._id = value;
+    }
+
+    get album(): Album {
+        return this._album;
+    }
+
+    set album(value: Album) {
+        this._album = value;
     }
 }

@@ -1,6 +1,7 @@
 import {IManagement} from "./IManagement";
 import {Album} from "./album";
-import {Song} from "./song";
+
+
 
 export class ManagerAlbum implements IManagement<Album>{
     listAlbum: Album[] = [];
@@ -17,18 +18,6 @@ export class ManagerAlbum implements IManagement<Album>{
     }
     findAll(): Album[] {
         return this.listAlbum
-    }
-
-    findBySongInAlbum(id:number){
-          let listSongInAlbum = []
-        for (let i = 0; i < this.listAlbum.length; i++) {
-            if ( this.listAlbum[i].id === id){
-               listSongInAlbum.push(this.listAlbum[i].listSong)
-                console.log(listSongInAlbum)
-
-            }
-        }
-        return listSongInAlbum
     }
 
 
@@ -55,5 +44,7 @@ export class ManagerAlbum implements IManagement<Album>{
     finByIndex(index: number): Album{
         return this.listAlbum[index]
     }
+
+
 
 }
